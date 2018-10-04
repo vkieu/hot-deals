@@ -1,0 +1,14 @@
+send.email=false
+
+mail.host=
+mail.user=
+mail.pass=
+
+mail.from=
+mail.to=
+mail.bcc=
+mail.subject=Hot deals
+
+filter.product.temperature.above=100
+filter.product.price.above=50
+

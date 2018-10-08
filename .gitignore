@@ -2,3 +2,5 @@
 target
 *.iml
 app.properties.enc
+app.properties
+*.log

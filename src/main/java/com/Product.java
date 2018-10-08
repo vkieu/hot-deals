@@ -9,10 +9,11 @@ public class Product {
 	private Price price;
 	private Vote vote;
 	private String imageLink;
+	private String expiredStr;
 
 
-
-	public Product(){}
+	public Product() {
+	}
 
 	public int getId() {
 		return Math.abs(hashCode());
@@ -58,6 +59,17 @@ public class Product {
 		this.price = new Price(price);
 	}
 
+	public boolean isExpired() {
+		if (expiredStr != null) {
+			return expiredStr.toLowerCase().contains("expired");
+		}
+		return false;
+	}
+
+	public void setExpired(String expiredStr) {
+		this.expiredStr = expiredStr;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -85,7 +97,7 @@ public class Product {
 				",\nprice='" + price + '\'' +
 				",\nvote='" + vote + '\'' +
 				",\nlink='" + link + '\'' +
-				",\n\n<img src=\"" + imageLink  + "\"/>" +
+				",\n\n<img src=\"" + imageLink + "\"/>" +
 				"}\n\n";
 	}
 }

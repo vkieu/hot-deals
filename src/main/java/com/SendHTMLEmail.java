@@ -7,9 +7,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
+import org.apache.log4j.Logger;
 
 public class SendHTMLEmail {
+	final static Logger LOG = Logger.getLogger(SendHTMLEmail.class);
 
 	public static void main(String[] args) throws Exception {
 		System.getenv().forEach((k, v) -> {
@@ -19,11 +20,9 @@ public class SendHTMLEmail {
 	}
 
 	public static boolean sendHTML(String messageText) {
+		LOG.debug("Message text: " + messageText);
+
 		AppProperties appProperties = AppProperties.getInstance();
-		if (!appProperties.getPropertyBoolean("send.email")) {
-			System.out.println("Email not sent");
-			return false;
-		}
 
 		messageText = messageText.replaceAll("\n", "<br/>");
 
@@ -68,11 +67,11 @@ public class SendHTMLEmail {
 			trnsport.sendMessage(message, message.getAllRecipients());
 			trnsport.close();
 
-			System.out.println("Email sent successfully....");
+			LOG.info("Email sent successfully....");
 			return true;
 
 		} catch (MessagingException mex) {
-			mex.printStackTrace();
+			LOG.error("Error sending email", mex);
 			return false;
 		}
 	}
